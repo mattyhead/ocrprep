@@ -1,3 +1,6 @@
+OCRprep
+=======
+
 ocrprep prepares photos taken in less than optimal conditions for optical character recognition.
 
 We use OpenCV for almost everything
