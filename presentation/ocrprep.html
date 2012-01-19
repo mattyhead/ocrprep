@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Using OpenCV image processing to improve the accuracy of OCR</title>
+    
+    <meta name="description" content="How I used Python & OpenCV to improve the accuracy of my OCR">
+    <meta name="author" content="Jim Snavely" />
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+
+    <link href="css/impress-demo.css" rel="stylesheet" />
+</head>
+<body>
+
+<div id="impress" class="impress-not-supported">
+
+    <div class="fallback-message">
+        <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+        <p>For the best experience please use the latest <b>Chrome</b> or <b>Safari</b> browser. Firefox 10 (to be released soon) will also handle it.</p>
+    </div>
+
+    <div id="start" class="step " data-x="0" data-y="-1500"> <p> Last year, I built a simple app to let people search a database of articles. </p>
+    <center>
+    <img height="75%" halign="center" src="images/knownow.png"/>
+          </center>
+    </div> 
+
+    <div class="step " data-x="1000" data-y="-1500"> <p> But typing <b>anything</b> on a phone just sucks</p>
+        <center> <br/>
+            <img height="75%" halign="center" src="images/type.png"/>
+        </center>
+    </div> 
+
+    <div class="step " data-x="2000" data-y="-1500"> <q> So I added a feature to let you search based on a photo</q>
+    
+            <img height="50%" halign="center" src="images/camera.png"/>
+    
+    </div> 
+
+    <div class="step " data-x="3000" data-y="-1500"> <q> You snap a picture, the app uploads the image to a server that performs OCR, executes the search and returns results</q> </div> 
+
+    <div class="step " data-x="0" data-y="-2500"> <q> I used <a href='http://code.google.com/p/tesseract-ocr/'>Tesseract</a>, an OCR engine developed at HP and then Google</q> <p>It seems to be one of the most accurate open source OCR packages around, with many different language models. </p> </div> 
+    
+    <div class="step " data-x="1000" data-y="-2500"> 
+    <q>It worked, mostly. But images coming from a camera phone are: </q>
+    <ul>
+        <li>&bull; unevenly lit</li>
+        <li>&bull; not properly aligned (rotated)</li>
+        <li>&bull; noisy</li>
+    </ul>
+    </div> 
+
+    <div class="step " data-x="2000" data-y="-2500"> <q>Python and OpenCV to the rescue!</q> <img height="75%" src="images/opencv.jpg"/>  </div> 
+      
+    <div class="step " data-x="3200" data-y="-2500">
+        <q>Adaptive thresholding can help fix lighting issues:</q>
+        <center>
+            <img height="25%" halign="center" src="images/thresh_problem.jpg"/>
+            <img height="25%" halign="center" src="images/thresh_fix.jpg"/>
+        </center>
+
+            <span class="small">Credit: <a href="http://mindhacks.com/">Mind Hacks</a></span>
+    </div>
+
+    <div class="step " data-x="0" data-y="-3500">
+        <q>Clean up noisy images using edge preserving median blur, dilation and erosion </q>
+    </div>
+
+    <div class="step" data-x="0" data-y="-3300" data-scale=".20">
+            <img height="200%" halign="center" src="images/noisy.jpg"/>
+     </div>
+
+
+    <div class="step " data-x="1000" data-y="-3500">
+        <q>The hough transform finds lines formed by rows of text</q>
+            <img height="75%" halign="center" src="images/found_lines.jpg"/>
+    </div>
+
+    <div class="step " data-x="2000" data-y="-3500" data-rotate="11">
+        <q> 
+         Once we know what the lines look like, we can calculate the degree of rotation
+        </q>
+            <img height="75%" halign="center" src="images/rotate.jpg"/>
+    </div>
+
+    <div class="step " data-x="3000" data-y="-3500"> <q> 
+    OpenCV will build a rotation matrix for us given a point around which to rotate, and the angle
+    </q> </div> 
+
+
+    <div id="overview" class="step" data-x="3000" data-y="-1500" data-scale="10">
+    </div>
+
+</div>
+
+<div class="hint">
+    <p>Use a spacebar or arrow keys to navigate</p>
+</div>
+
+<script src="js/impress.js"></script>
+
+</body>
+</html>
