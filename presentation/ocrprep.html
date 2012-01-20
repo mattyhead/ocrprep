@@ -34,8 +34,11 @@
 
     <div class="step " data-x="2000" data-y="-1500"> <q> So I added a feature to let you search based on a photo</q>
     
-            <img height="50%" halign="center" src="images/camera.png"/>
-    
+    <div style="vertical-align: top">
+            <img height="25%" style="vertical-align:middle" src="images/camera.png"/>
+            <img height="10%" style="vertical-align:middle" src="images/arrow.svg"/>
+            <span>HTTP POST</span> </div>
+
     </div> 
 
     <div class="step " data-x="3000" data-y="-1500"> <q> You snap a picture, the app uploads the image to a server that performs OCR, executes the search and returns results</q> </div> 
@@ -60,11 +63,16 @@
             <img height="25%" halign="center" src="images/thresh_fix.jpg"/>
         </center>
 
-            <span class="small">Credit: <a href="http://mindhacks.com/">Mind Hacks</a></span>
+            <span class="smalltext">Credit: <a href="http://mindhacks.com/">Mind Hacks</a></span>
     </div>
 
     <div class="step " data-x="0" data-y="-3500">
-        <q>Clean up noisy images using edge preserving median blur, dilation and erosion </q>
+        <p>Clean up noisy images using </p>
+    <ul>
+        <li>&bull; edge preserving median blur (low pass filter)</li>
+        <li>&bull; dilation and erosion (the morphological operators) </li>
+        <li>&bull; up and down resampling (Gaussian pyramid decomposition) </li>
+    </ul>
     </div>
 
     <div class="step" data-x="0" data-y="-3300" data-scale=".20">
@@ -73,7 +81,7 @@
 
 
     <div class="step " data-x="1000" data-y="-3500">
-        <q>The hough transform finds lines formed by rows of text</q>
+        <q>The hough transform finds lines in any image</q>
             <img height="75%" halign="center" src="images/found_lines.jpg"/>
     </div>
 
