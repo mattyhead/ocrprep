@@ -43,7 +43,7 @@
 
     <div class="step " data-x="3000" data-y="-1500"> <q> You snap a picture, the app uploads the image to a server that performs OCR, executes the search and returns results</q> </div> 
 
-    <div class="step " data-x="0" data-y="-2500"> <q> I used <a href='http://code.google.com/p/tesseract-ocr/'>Tesseract</a>, an OCR engine developed at HP and then Google</q> <p>It seems to be one of the most accurate open source OCR packages around, with many different language models. </p> </div> 
+    <div class="step " data-x="0" data-y="-2500"> <q> I used <a href='http://code.google.com/p/tesseract-ocr/'>Tesseract</a>, an OCR engine developed at HP and then Google.</q> <p>It seems to be one of the most accurate open source OCR packages around, with many different language models. </p> </div> 
     
     <div class="step " data-x="1000" data-y="-2500"> 
     <q>It worked, mostly. But images coming from a camera phone are: </q>
@@ -81,9 +81,9 @@ def threshhold(img):
     <div class="step " data-x="0" data-y="-3500">
         <p>Clean up noisy images using </p>
     <ul>
-        <li>&bull; edge preserving median blur (low pass filter)</li>
-        <li>&bull; dilation and erosion (the morphological operators) </li>
-        <li>&bull; up and down resampling (Gaussian pyramid decomposition) </li>
+        <li>&bull; <a href="http://opencv.willowgarage.com/documentation/python/imgproc_image_filtering.html?highlight=smooth#Smooth">edge preserving median blur</a> (low pass filter)</li>
+        <li>&bull; <a href="http://opencv.willowgarage.com/documentation/python/imgproc_image_filtering.html?highlight=smooth#dilate">dilation and erosion</a> (the morphological operators) </li>
+        <li>&bull; <a href="http://opencv.willowgarage.com/documentation/python/imgproc_image_filtering.html?highlight=smooth#pyrdown">up and down resampling</a> (Gaussian pyramid decomposition) </li>
     </ul>
 
     </div>
@@ -106,7 +106,7 @@ def findLines(src):
     dst = cv.CreateImage(cv.GetSize(src), 8, 1)
     color_dst = cv.CreateImage(cv.GetSize(src), 8, 3)
     storage = cv.CreateMemStorage(0)
-    cv.Canny(src, dst, 50, 200, 3)
+    <b>cv.Canny(src, dst, 50, 200, 3)</b>
     cv.CvtColor(dst, color_dst, cv.CV_GRAY2BGR)
     return cv.HoughLines2(dst, storage, cv.CV_HOUGH_STANDARD, 1, pi / 180, 100, 0, 0)
 </pre>
@@ -122,7 +122,6 @@ def findLines(src):
     <div class="step " data-x="3000" data-y="-3500"> <q> 
     OpenCV will build a rotation matrix for us given a point around which to rotate, and the angle
     </q> 
-
 <pre>
 def rotate(img, angle):
     center = (img.width/2.0, img.height/2.0)
@@ -132,8 +131,20 @@ def rotate(img, angle):
     cv.WarpAffine(img, dst, rot_mat, fillval=255)
     return dst
 </pre>
-
 </div> 
+
+<div class="step " data-x="2000" data-y="-4500">
+<p> You can find source code, and this presentation at my github: </p>
+<center><a href="https://github.com/ludflu/ocrprep">https://github.com/ludflu/ocrprep</a></center> </p>
+<p>questions/comments: 
+<center>
+Jim Snavely
+<a href="mailto:ludflu@gmail.com">ludflu@gmail.com</a>
+</center>
+</p>
+        
+    </div>
+
 
 
     <div id="overview" class="step" data-x="3000" data-y="-1500" data-scale="10">
