@@ -63,7 +63,19 @@
             <img height="25%" halign="center" src="images/thresh_fix.jpg"/>
         </center>
 
-            <span class="smalltext">Credit: <a href="http://mindhacks.com/">Mind Hacks</a></span>
+<pre>
+def threshhold(img):
+    bwdst = cv.CreateImage( cv.GetSize(img), cv.IPL_DEPTH_8U, 1)
+    cv.CvtColor(img, bwdst, cv.CV_BGR2GRAY)
+    cv.AdaptiveThreshold(bwdst, bwdst, 255.0, cv.CV_THRESH_BINARY, 
+                         cv.CV_ADAPTIVE_THRESH_MEAN_C,11)
+    cv.Dilate(bwdst,bwdst)
+    cv.Erode(bwdst,bwdst)
+    return bwdst
+</pre>
+
+
+            <span class="smalltext">image credit: <a href="http://mindhacks.com/">Mind Hacks</a></span>
     </div>
 
     <div class="step " data-x="0" data-y="-3500">
@@ -73,9 +85,10 @@
         <li>&bull; dilation and erosion (the morphological operators) </li>
         <li>&bull; up and down resampling (Gaussian pyramid decomposition) </li>
     </ul>
+
     </div>
 
-    <div class="step" data-x="0" data-y="-3300" data-scale=".20">
+    <div class="step" data-x="0" data-y="-3150" data-scale=".20">
             <img height="200%" halign="center" src="images/noisy.jpg"/>
      </div>
 
@@ -84,6 +97,20 @@
         <q>The hough transform finds lines in any image</q>
             <img height="75%" halign="center" src="images/found_lines.jpg"/>
     </div>
+
+
+    <div class="step " data-x="1000" data-y="-4500">
+<q>Before applying the Hough transform, it helps if we apply a edge detector, aka a high pass filter</q>
+<pre>
+def findLines(src):
+    dst = cv.CreateImage(cv.GetSize(src), 8, 1)
+    color_dst = cv.CreateImage(cv.GetSize(src), 8, 3)
+    storage = cv.CreateMemStorage(0)
+    cv.Canny(src, dst, 50, 200, 3)
+    cv.CvtColor(dst, color_dst, cv.CV_GRAY2BGR)
+    return cv.HoughLines2(dst, storage, cv.CV_HOUGH_STANDARD, 1, pi / 180, 100, 0, 0)
+</pre>
+</div>
 
     <div class="step " data-x="2000" data-y="-3500" data-rotate="11">
         <q> 
@@ -94,7 +121,19 @@
 
     <div class="step " data-x="3000" data-y="-3500"> <q> 
     OpenCV will build a rotation matrix for us given a point around which to rotate, and the angle
-    </q> </div> 
+    </q> 
+
+<pre>
+def rotate(img, angle):
+    center = (img.width/2.0, img.height/2.0)
+    rot_mat = cv.CreateMat(2, 3, cv.CV_32FC1)
+    cv.GetRotationMatrix2D(center, angle, 1.0,rot_mat)
+    dst = cv.CreateImage( cv.GetSize(img), cv.IPL_DEPTH_8U, 1)
+    cv.WarpAffine(img, dst, rot_mat, fillval=255)
+    return dst
+</pre>
+
+</div> 
 
 
     <div id="overview" class="step" data-x="3000" data-y="-1500" data-scale="10">

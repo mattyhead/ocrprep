@@ -15,11 +15,9 @@ def findLines(src):
     dst = cv.CreateImage(cv.GetSize(src), 8, 1)
     color_dst = cv.CreateImage(cv.GetSize(src), 8, 3)
     storage = cv.CreateMemStorage(0)
-    lines = 0
     cv.Canny(src, dst, 50, 200, 3)
     cv.CvtColor(dst, color_dst, cv.CV_GRAY2BGR)
-    lines = cv.HoughLines2(dst, storage, cv.CV_HOUGH_STANDARD, 1, pi / 180, 100, 0, 0)
-    return lines
+    return cv.HoughLines2(dst, storage, cv.CV_HOUGH_STANDARD, 1, pi / 180, 100, 0, 0)
 
 def snd((a,b)):
     return b
@@ -48,12 +46,9 @@ def rotate(img, angle):
     return dst
 
 def threshhold(img):
-    bwsrc = cv.CreateImage( cv.GetSize(img), cv.IPL_DEPTH_8U, 1)
     bwdst = cv.CreateImage( cv.GetSize(img), cv.IPL_DEPTH_8U, 1)
-
-    cv.CvtColor(img, bwsrc, cv.CV_BGR2GRAY)
-    cv.AdaptiveThreshold(bwsrc, bwdst, 255.0, cv.CV_THRESH_BINARY, cv.CV_ADAPTIVE_THRESH_MEAN_C,11)
-    cv.Smooth(bwdst, bwdst, cv.CV_MEDIAN, 1, 1)
+    cv.CvtColor(img, bwdst, cv.CV_BGR2GRAY)
+    cv.AdaptiveThreshold(bwdst, bwdst, 255.0, cv.CV_THRESH_BINARY, cv.CV_ADAPTIVE_THRESH_MEAN_C,11)
     cv.Dilate(bwdst,bwdst)
     cv.Erode(bwdst,bwdst)
     return bwdst
