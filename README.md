@@ -3,6 +3,8 @@ OCRprep
 
 ocrprep prepares photos taken in less than optimal conditions for optical character recognition.
 
+ocrprep is licensed under the LGPL http://www.gnu.org/licenses/lgpl-3.0.txt
+      
 We use OpenCV for almost everything
 
 1. adaptive thresholding fixes lighting issue that can occur when using camera phones
